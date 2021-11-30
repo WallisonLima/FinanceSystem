@@ -1,5 +1,6 @@
 import * as C from './styles';
 import { formatCurrentMonth } from '../../helpers/dateFilter'
+import { ResumeItem } from '../ResumeItem'
 
 type Props = {
     currentMonth: string;
@@ -32,7 +33,9 @@ export const InfoArea = ({ currentMonth, onMonthChange, income, expense }: Props
                 <C.MonthArrow onClick={handleNextMonth}>→</C.MonthArrow>
             </C.MonthArea>
             <C.ResumeArea>
-
+                <ResumeItem title="Receitas" value={income} />
+                <ResumeItem title="Despesas" value={expense} />
+                <ResumeItem title="Balanço" value={income - expense} color={income - expense < 0 ? 'red' : 'green'} />
             </C.ResumeArea>
         </C.Container>
     );
