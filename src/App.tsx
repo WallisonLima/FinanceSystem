@@ -6,8 +6,10 @@ import { items } from './data/items'
 import { Item } from './types/Item'
 import * as C from './App.styles'
 
+
 import { TableArea } from './components/TableArea'
 import { InfoArea } from './components/InfoArea'
+import { InputArea } from './components/InputArea'
 
 
 function App() {
@@ -24,7 +26,6 @@ function App() {
   useEffect(()=>{
     let incomeCount = 0;
     let expenseCount = 0;
-
     for(let i in filterList){
       if(categories[filterList[i].category].expense){
         expenseCount += filterList[i].value
@@ -32,7 +33,6 @@ function App() {
         incomeCount += filterList[i].value
       }
     }
-
     setIncome(incomeCount)
     setExpense(expenseCount)
 
@@ -40,6 +40,12 @@ function App() {
 
   const handleCurrentMonth = (newMonth: string) => {
     setCurrentMonth(newMonth)
+  }
+
+  const handleAddItem = ( item: Item ) =>{
+    let newList = [...list];
+    newList.push(item);
+    setList(newList)
   }
 
   return (
@@ -58,7 +64,7 @@ function App() {
 
         />
 
-        {/*  Área de inserção */}
+        <InputArea onAdd={handleAddItem}/>
 
         <TableArea list={filterList} />
       </C.Body>
